@@ -1,0 +1,7 @@
+- id: semantic_commit
+  name: semantic_commit
+  description: Parses git branch names and generates semantically valid commits.
+  entry: create_message
+  language: python
+  always_run: True
+  stages: [prepare-commit-msg]
