@@ -11,14 +11,14 @@ This hook supports commit message creation from the command line in two ways:
 
 ## Installation
 
+> [!NOTE]
+> If you have run `pre-commit install` but are still not seeing the hook run before every commit, try running `pre-commit install --hook-type prepare-commit-msg`
+
 1. In order to use this pre-commit hook, you first need to install the pre-commit library. [More info here](https://pre-commit.com/#installation)
 
 2. In the root of the project you're interested in working in, create a `.pre-commit-config.yaml` file.
 
 3. Run `pre-commit install` to install the githook in your repository
-
-> [!NOTE]
-> If you have run `pre-commit install` but are still not seeing the hook run before every commit, try running `pre-commit install --hook-type prepare-commit-msg`
 
 4. Enjoy!
 
