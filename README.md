@@ -25,6 +25,7 @@ This hook supports commit message creation from the command line in two ways:
 ### Sample .pre-commit-config.yaml
 
 ```yaml
+default_install_hook_types: [pre-commit, prepare-commit-msg]
 repos:
   - repo: https://github.com/SethAngell/semantic-commit-formatter
     rev: v1
