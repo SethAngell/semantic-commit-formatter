@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = semantic_commit
+description = "Parses git branch names and generates semantically valid commits."
+version = 1.1.3
+authors = [
+    { name= "Seth Angell", email = "work@sethangell.com}
+]
+readme = "README.md"
+license = {text = "MIT License"}
+project_urls =
+
+
+[project.urls]
+Homepage = https://github.com/SethAngell/semantic-commit-formatter
+Author = https://sethangell.com
+
+[options]
+packages = find:
+
+[project.entry_points]
+create_message = semantic_commit.main:main
