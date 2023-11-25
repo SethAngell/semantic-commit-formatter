@@ -1,4 +1,7 @@
-import os, sys, argparse, json
+import os
+import sys
+import argparse
+import json
 from subprocess import Popen, PIPE
 import logging
 
@@ -24,14 +27,14 @@ def _configure_logging():
     )
     log_file_path = os.path.join(log_file_directory, "hooks.log")
 
-    if os.path.exists(log_file_directory) != True:
+    if os.path.exists(log_file_directory) is not True:
         os.makedirs(log_file_directory)
 
     logging.basicConfig(filename=log_file_path, encoding="utf-8", level=logging.DEBUG)
 
 
 def _handle_logging(message, warning=False, error=False):
-    if logging_enabled == False:
+    if not logging_enabled:
         return
 
     if error:
@@ -42,12 +45,15 @@ def _handle_logging(message, warning=False, error=False):
         logging.debug(message)
 
 
-def _log_environment_details(message_path: str, strictness: bool):
+def _log_environment_details(
+    message_path: str, strictness: bool, inline_commit_message: str
+):
     logging.warning(
         "Currently logging due to your pre-commit-config.yaml config. See https://github.com/SethAngell/semantic-commit-formatter for more information."
     )
     logging.debug(f"{message_path=}")
     logging.debug(f"{strictness=}")
+    logging.debug(f"{inline_commit_message= }")
     logging.debug(f'{os.getenv("PRE_COMMIT_COMMIT_MSG_SOURCE")= }')
     logging.debug(f'{os.getenv("PRE_COMMIT_COMMIT_OBJECT_NAME")= }')
 
@@ -168,13 +174,13 @@ def main():
     parser.add_argument("--log", action="store_true")
     args = parser.parse_args()
 
-    inline_commit_message = os.getenv("PRE_COMMIT_COMMIT_MSG_SOURCE", "message")
+    inline_commit_message = os.getenv("PRE_COMMIT_COMMIT_MSG_SOURCE", "template")
 
     if args.log:
         global logging_enabled
         logging_enabled = True
         _configure_logging()
-        _log_environment_details(args.message_path, args.strict)
+        _log_environment_details(args.message_path, args.strict, inline_commit_message)
 
     branch_elements = _get_branch_details()
     branch_type, branch_context = _generate_context_and_type(branch_elements)
