@@ -1,4 +1,7 @@
-import os, sys, argparse, json
+import os
+import sys
+import argparse
+import json
 from subprocess import Popen, PIPE
 import logging
 
@@ -24,14 +27,14 @@ def _configure_logging():
     )
     log_file_path = os.path.join(log_file_directory, "hooks.log")
 
-    if os.path.exists(log_file_directory) != True:
+    if os.path.exists(log_file_directory) is not True:
         os.makedirs(log_file_directory)
 
     logging.basicConfig(filename=log_file_path, encoding="utf-8", level=logging.DEBUG)
 
 
 def _handle_logging(message, warning=False, error=False):
-    if logging_enabled == False:
+    if not logging_enabled:
         return
 
     if error:
