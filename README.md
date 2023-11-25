@@ -28,7 +28,7 @@ This hook supports commit message creation from the command line in two ways:
 default_install_hook_types: [pre-commit, prepare-commit-msg]
 repos:
   - repo: https://github.com/SethAngell/semantic-commit-formatter
-    rev: v1
+    rev: v1.1.3
     hooks:
       - id: semantic_commit
         stages: [prepare-commit-msg]
